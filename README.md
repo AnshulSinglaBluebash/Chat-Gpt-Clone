@@ -7,6 +7,7 @@ A simple ChatGPT-style application built with FastAPI, PostgreSQL, JWT authentic
 - JWT-based signup and login
 - Protected chat API with bearer token auth
 - OpenAI-powered responses
+- pgvector-powered embeddings and basic retrieval
 - Chat sessions and chat history
 - PostgreSQL database with SQLAlchemy models
 - Swagger UI for API testing
@@ -80,3 +81,4 @@ streamlit run streamlit_app/app.py
 - Do not commit your real `.env` file or API keys.
 - Use `session_id: null` for a new conversation.
 - Reuse the returned `session_id` to continue the same chat session.
+- The first chat request seeds a small knowledge base into the `embeddings` table and uses pgvector similarity search to retrieve relevant context.

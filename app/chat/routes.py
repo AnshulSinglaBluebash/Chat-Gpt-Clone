@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.auth.routes import get_current_user
+from app.chat.rag import get_relevant_context
 from app.chat.service import get_ai_response
 from app.db.database import SessionLocal
 from app.db.models import Chat, Session as DBSession, User
@@ -69,7 +70,8 @@ def send_message(
         db.add(user_chat)
         db.commit()
 
-        ai_reply = get_ai_response(message)
+        context_chunks = get_relevant_context(db, message)
+        ai_reply = get_ai_response(message, context_chunks=context_chunks)
 
         ai_chat = Chat(
             session_id=session.id,
