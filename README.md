@@ -17,13 +17,34 @@ A simple ChatGPT-style application built with FastAPI, PostgreSQL, JWT authentic
 ## Project Structure
 
 ```text
-app/
-  auth/
-  chat/
-  db/
-  main.py
-streamlit_app/
-  app.py
+ChatGpt_Clone/
+  .env.example              # Sample environment variables
+  alembic.ini               # Alembic configuration
+  create_table.py           # DB table creation helper
+  README.md                 # Project documentation
+  alembic/
+    env.py                  # Alembic migration environment
+    versions/               # Database migration files
+  app/
+    main.py                 # FastAPI app entrypoint, CORS, logging, health route
+    auth/
+      routes.py             # Signup, login, and current-user APIs
+      jwt_handler.py        # JWT create/decode helpers
+      utils.py              # Password hashing and verification
+    chat/
+      routes.py             # Chat send/history/session APIs
+      service.py            # OpenAI response generation
+      rag.py                # Embeddings + retrieval logic
+    db/
+      database.py           # SQLAlchemy engine/session setup
+      models.py             # ORM models
+      schemas.py            # Pydantic request/response schemas
+      test_db.py            # DB connection test helper
+    langserve/
+      routes.py             # LangServe route module placeholder
+  streamlit_app/
+    app.py                  # Streamlit frontend
+    __init__.py
 ```
 
 ## Backend APIs
